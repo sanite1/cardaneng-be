@@ -1,0 +1,52 @@
+{
+  "name": "cardaneng-backend",
+  "version": "1.0.0",
+  "description": "API backend for Cardan Engineering — manages Projects, Products and News for the public website.",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed": "tsx src/seed.ts",
+    "typecheck": "tsc --noEmit",
+    "check-types": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "check-format": "prettier --check \"src/**/*.ts\"",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "cardan",
+    "engineering",
+    "api",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "multer": "^2.1.1",
+    "nodemailer": "^8.0.11"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^22.10.5",
+    "@types/nodemailer": "^8.0.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
