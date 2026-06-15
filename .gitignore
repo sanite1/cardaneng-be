@@ -6,3 +6,6 @@ dist/
 npm-debug.log*
 .DS_Store
 coverage/
+
+# Claude Code personal/local settings
+.claude/settings.local.json

@@ -19,9 +19,11 @@ export const env = {
   cloudinaryApiKey: fromEnv('CLOUDINARY_API_KEY', ''),
   cloudinaryApiSecret: fromEnv('CLOUDINARY_API_SECRET', ''),
   cloudinaryFolder: fromEnv('CLOUDINARY_FOLDER', 'cardaneng'),
+  // SMTP (e.g. Zoho). The From must be the authenticated mailbox (or a
+  // verified alias), so set MAIL_FROM to the SMTP_USER address.
   smtpHost: fromEnv('SMTP_HOST', ''),
-  smtpPort: Number(process.env.SMTP_PORT ?? 587),
-  smtpSecure: process.env.SMTP_SECURE === 'true',
+  smtpPort: Number(process.env.SMTP_PORT ?? 465),
+  smtpSecure: process.env.SMTP_SECURE !== 'false', // default true (port 465)
   smtpUser: fromEnv('SMTP_USER', ''),
   smtpPass: fromEnv('SMTP_PASS', ''),
   mailFrom: fromEnv('MAIL_FROM', 'Cardan Engineering <no-reply@cardaneng.com>'),

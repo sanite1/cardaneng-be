@@ -2,8 +2,8 @@
  * Seeds the database with Cardan's real starter content. Safe to re-run: it
  * clears each collection first. Run with `npm run seed` after setting MONGODB_URI.
  *
- * Extend these arrays (or import from the frontend's data/content.ts) to load
- * the full catalogue.
+ * Mirrors the public site's data/content.ts (projects + products). Services are
+ * NOT seeded — they are static site content, not an admin-managed type.
  */
 import { connectDb, disconnectDb } from './config/db';
 import { Project } from './models/Project';
@@ -47,6 +47,9 @@ const projects = [
     images: [
       '/images/resource/project/cool1.png',
       '/images/resource/project/cool2.png',
+      '/images/resource/project/cool3.png',
+      '/images/resource/project/cool4.png',
+      '/images/resource/project/cool5.png',
     ],
   },
 ];
@@ -63,9 +66,84 @@ const products = [
     image: '/images/resource/product/product3.png',
   },
   {
-    name: 'Delta Cable Ladder',
+    name: 'Package & Unit Substation',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product2.png',
+  },
+  {
+    name: 'Distribution Transformers',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product1.png',
+  },
+  {
+    name: 'Lighting & Bell Switches',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product2/switch.png',
+  },
+  {
+    name: 'Power Socket Outlets',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product2/socket.png',
+  },
+  {
+    name: 'Electric Lighting Lamps',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product2/bulb.png',
+  },
+  {
+    name: 'Cables & Wires',
+    brand: 'Alfanar',
+    image: '/images/resource/product/product2/wires.png',
+  },
+  {
+    name: 'Delta Strut Systems',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/1.png',
+  },
+  {
+    name: 'Cable Trucking & Fittings',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/2.png',
+  },
+  {
+    name: 'Cable Ladder',
     brand: 'Transdelta',
     image: '/images/resource/product/product2/3.png',
+  },
+  {
+    name: 'Delta Cleat',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/cleat.png',
+  },
+  {
+    name: 'Delta Pull Box',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/pullbox.png',
+  },
+  {
+    name: 'Delta Wire Basket',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/basket-tray.png',
+  },
+  {
+    name: 'G.I. Conduits & Accessories',
+    brand: 'Transdelta',
+    image: '/images/resource/product/product2/conduit.png',
+  },
+  {
+    name: 'Single Phase Variable Speed Drive (ATV12)',
+    brand: 'Others',
+    image: '/images/resource/product/product2/phase.png',
+  },
+  {
+    name: 'Insect-O-Cutor',
+    brand: 'Others',
+    image: '/images/resource/product/product2/insocutor.png',
+  },
+  {
+    name: 'Heating Jacket',
+    brand: 'Others',
+    image: '/images/resource/product/product2/heat.png',
   },
 ];
 

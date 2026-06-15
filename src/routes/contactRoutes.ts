@@ -81,15 +81,15 @@ router.post(
       await mailer.sendMail({
         from: env.mailFrom,
         to: email,
-        subject: `We've received your message — ${env.companyName}`,
-        text: `Hi ${name},\n\nThank you for contacting ${env.companyName}. We have received your message and a member of our team will get back to you shortly.\n\nYour message:\n${message}\n\n— ${env.companyName}`,
+        subject: `We have received your message`,
+        text: `Hi ${name},\n\nThank you for contacting ${env.companyName}. We have received your message and a member of our team will get back to you shortly.\n\nYour message:\n${message}\n\n${env.companyName}`,
         html: `
           <p>Hi ${escapeHtml(name)},</p>
           <p>Thank you for contacting <strong>${escapeHtml(
             env.companyName
           )}</strong>. We have received your message and a member of our team will get back to you shortly.</p>
           <p style="color:#555"><em>Your message:</em><br>${safeMsg}</p>
-          <p>— ${escapeHtml(env.companyName)}</p>`,
+          <p>${escapeHtml(env.companyName)}</p>`,
       });
     }
 
