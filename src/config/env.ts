@@ -26,8 +26,14 @@ export const env = {
   smtpSecure: process.env.SMTP_SECURE !== 'false', // default true (port 465)
   smtpUser: fromEnv('SMTP_USER', ''),
   smtpPass: fromEnv('SMTP_PASS', ''),
-  mailFrom: fromEnv('MAIL_FROM', 'Cardan Engineering <no-reply@cardaneng.com>'),
-  contactRecipient: fromEnv('CONTACT_RECIPIENT', 'info@cardaneng.com'),
+  mailFrom: fromEnv(
+    'MAIL_FROM',
+    'Cardan Engineering <no-reply@cardanengineeringltd.com>'
+  ),
+  contactRecipient: fromEnv(
+    'CONTACT_RECIPIENT',
+    'info@cardanengineeringltd.com'
+  ),
   companyName: fromEnv('COMPANY_NAME', 'Cardan Engineering Limited'),
   // Cloudflare Turnstile (optional CAPTCHA). Leave empty to disable.
   turnstileSecret: fromEnv('TURNSTILE_SECRET', ''),

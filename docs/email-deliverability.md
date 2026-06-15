@@ -2,7 +2,7 @@
 
 The contact form sends two emails (notify the company + confirm to the sender).
 Without domain authentication, providers like Gmail/Outlook will flag them as
-spam or reject them. These are **DNS records on the `cardaneng.com` domain** —
+spam or reject them. These are **DNS records on the `cardanengineeringltd.com` domain** —
 no code changes. Set them once.
 
 > **Recommendation:** send through a reputable provider (Resend, Brevo, Mailgun,
@@ -14,12 +14,12 @@ no code changes. Set them once.
 
 ## 1. SPF — authorizes who may send for your domain
 
-Add **one** TXT record on `cardaneng.com` (only ever one SPF record — merge
+Add **one** TXT record on `cardanengineeringltd.com` (only ever one SPF record — merge
 `include:` entries if you have several senders):
 
 | Type | Name | Value |
 | --- | --- | --- |
-| TXT | `@` (cardaneng.com) | `v=spf1 include:<provider> ~all` |
+| TXT | `@` (cardanengineeringltd.com) | `v=spf1 include:<provider> ~all` |
 
 Replace `<provider>` with your sender's include:
 
@@ -40,7 +40,7 @@ Example (Brevo): `v=spf1 include:spf.sendinblue.com ~all`
 
 DKIM is **provider-specific** — you can't hand-write it. In your email
 provider's dashboard, open the domain/sending-authentication section and
-"Authenticate" / "Verify" `cardaneng.com`. It will give you one or more records
+"Authenticate" / "Verify" `cardanengineeringltd.com`. It will give you one or more records
 to add, usually CNAMEs like:
 
 | Type | Name | Value |
@@ -54,12 +54,12 @@ Add exactly what the provider shows, then click Verify.
 
 ## 3. DMARC — tells receivers what to do & gives you reports
 
-Add a TXT record at `_dmarc.cardaneng.com`. **Start in monitor mode** (`p=none`)
+Add a TXT record at `_dmarc.cardanengineeringltd.com`. **Start in monitor mode** (`p=none`)
 so nothing legitimate is blocked while you confirm SPF/DKIM pass:
 
 | Type | Name | Value |
 | --- | --- | --- |
-| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:dmarc@cardaneng.com; adkim=s; aspf=s; pct=100` |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:dmarc@cardanengineeringltd.com; adkim=s; aspf=s; pct=100` |
 
 Once reports show SPF + DKIM passing for your real mail (a week or two), tighten
 to `p=quarantine` and eventually `p=reject`.
@@ -76,7 +76,7 @@ to `p=quarantine` and eventually `p=reject`.
 ## 5. Common gotchas
 
 - **`MAIL_FROM` must match the authenticated domain.** Sending "from"
-  `no-reply@cardaneng.com` only passes if `cardaneng.com` is the domain you
+  `no-reply@cardanengineeringltd.com` only passes if `cardanengineeringltd.com` is the domain you
   set up above — not a gmail.com / yahoo.com address.
 - **Only one SPF record** per domain. Two SPF TXT records = both invalid.
 - DNS changes take time to propagate (minutes to a few hours).
