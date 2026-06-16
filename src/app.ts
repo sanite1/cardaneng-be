@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { env } from './config/env';
 import authRoutes from './routes/authRoutes';
-import uploadRoutes from './routes/uploadRoutes';
+import uploadRoutes, { uploadsDir } from './routes/uploadRoutes';
 import contactRoutes from './routes/contactRoutes';
 import messageRoutes from './routes/messageRoutes';
 import { resourceRouter } from './routes/resourceRouter';
@@ -21,6 +21,9 @@ export function createApp() {
   app.use(cors({ origin: env.corsOrigin }));
   // Large limit because uploaded images may arrive as base64 data URLs for now.
   app.use(express.json({ limit: '12mb' }));
+
+  // Serve disk-stored uploads (used when Cloudinary is not configured).
+  app.use('/uploads', express.static(uploadsDir));
 
   app.get('/api/health', (_req, res) => res.json({ ok: true }));
 

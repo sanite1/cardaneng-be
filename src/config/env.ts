@@ -9,6 +9,9 @@ function fromEnv(name: string, fallback: string): string {
 export const env = {
   port: Number(process.env.PORT ?? 4000),
   corsOrigin: fromEnv('CORS_ORIGIN', '*'),
+  // Public base URL of this API (e.g. https://api.example.com). Used to build
+  // absolute URLs for disk-stored uploads. Falls back to the request host.
+  publicUrl: fromEnv('PUBLIC_URL', ''),
   mongoUri: fromEnv('MONGODB_URI', 'mongodb://127.0.0.1:27017/cardaneng'),
   jwtSecret: fromEnv('JWT_SECRET', 'dev-secret-change-me'),
   jwtExpires: fromEnv('JWT_EXPIRES', '7d'),

@@ -11,6 +11,7 @@ const messageSchema = new Schema(
     subject: { type: String, default: '' },
     message: { type: String, required: true },
     handled: { type: Boolean, default: false },
+    reply: { type: String, default: '' }, // the admin's reply, sent by email
   },
   { timestamps: true, toJSON: baseToJSON }
 );

@@ -9,3 +9,6 @@ coverage/
 
 # Claude Code personal/local settings
 .claude/settings.local.json
+
+# Disk-stored uploads (dev fallback when Cloudinary is off)
+uploads/
