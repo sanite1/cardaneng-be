@@ -19,7 +19,32 @@ export function createApp() {
   // see the real client IP rather than the proxy's.
   app.set('trust proxy', 1);
 
-  app.use(cors({ origin: env.corsOrigin }));
+  // Allow the configured origins (comma-separated, or "*"), plus the apex and
+  // any subdomain of cardanengineeringltd.com (www, admin, etc.) and localhost.
+  const allowed = env.corsOrigin
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const allowAll = allowed.length === 0 || allowed.includes('*');
+  const originAllowed = (origin: string): boolean => {
+    if (allowAll || allowed.includes(origin)) return true;
+    try {
+      const host = new URL(origin).hostname;
+      return (
+        host === 'localhost' ||
+        host === '127.0.0.1' ||
+        host === 'cardanengineeringltd.com' ||
+        host.endsWith('.cardanengineeringltd.com')
+      );
+    } catch {
+      return false;
+    }
+  };
+  app.use(
+    cors({
+      origin: (origin, cb) => cb(null, !origin || originAllowed(origin)),
+    })
+  );
   // Large limit because uploaded images may arrive as base64 data URLs for now.
   app.use(express.json({ limit: '12mb' }));
 
