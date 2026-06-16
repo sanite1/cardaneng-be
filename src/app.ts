@@ -19,6 +19,11 @@ export function createApp() {
   // see the real client IP rather than the proxy's.
   app.set('trust proxy', 1);
 
+  // No ETags on the API: a 304 Not Modified response loses its CORS headers
+  // (on Vercel especially), so the browser blocks the revalidated request.
+  // Disabling ETags keeps every API call a full 200 with CORS headers.
+  app.set('etag', false);
+
   // Allow the configured origins (comma-separated, or "*"), plus the apex and
   // any subdomain of cardanengineeringltd.com (www, admin, etc.) and localhost.
   const allowed = env.corsOrigin
@@ -47,6 +52,12 @@ export function createApp() {
   );
   // Large limit because uploaded images may arrive as base64 data URLs for now.
   app.use(express.json({ limit: '12mb' }));
+
+  // Never cache/revalidate API responses (avoids the 304-without-CORS issue).
+  app.use('/api', (_req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    next();
+  });
 
   // Serve disk-stored uploads (used when Cloudinary is not configured).
   app.use('/uploads', express.static(uploadsDir));
