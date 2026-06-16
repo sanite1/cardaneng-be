@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { env } from './config/env';
+import { connectDb } from './config/db';
 import authRoutes from './routes/authRoutes';
 import uploadRoutes, { uploadsDir } from './routes/uploadRoutes';
 import contactRoutes from './routes/contactRoutes';
@@ -26,6 +27,15 @@ export function createApp() {
   app.use('/uploads', express.static(uploadsDir));
 
   app.get('/api/health', (_req, res) => res.json({ ok: true }));
+
+  // Ensure MongoDB is connected before handling data routes. On a persistent
+  // server it is already connected (no-op); on serverless it connects lazily
+  // and reuses the cached connection.
+  app.use((_req, _res, next) => {
+    connectDb()
+      .then(() => next())
+      .catch(next);
+  });
 
   app.use('/api/auth', authRoutes);
   app.use('/api/uploads', uploadRoutes);
